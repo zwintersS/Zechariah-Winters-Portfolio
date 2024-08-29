@@ -1,0 +1,70 @@
+Planning
+variables needed 
+refrigerator model name (can't equal XXX) 
+dimensions of the frig height, width, depth in inches
+conversion number 1728 inches to get cubic feet (this will be constant) 
+display end of job after the sentinel is entered 
+will need a module for name check and math involved 
+
+
+Start
+
+Declarations
+	string Model_Name
+	num Height
+	num Width
+	num Depth
+	num Cubic_Inches
+	num Cubic_Feet
+	num CONVERSION_NUMBER = 1728
+
+//Collecting inputs from user 
+input HEIGHT_PROMPT "What is the height in inches?" 
+input WIDTH_PROMPT "What is the width in inches?" 
+input DEPTH_PROMPT "What is the depth in inches?" 
+
+//outputting info calculated in refrigerator details
+RefeigeratorDetails()
+while Model_Name NOT = "XXX" 
+
+	detailLoop()
+endwhile
+
+output num Cubic_Feet
+output string Model_Name
+
+//Ending job
+EndofJob()
+
+
+End 
+
+
+RefigeratorDetails()
+input MODEL_NAME_PROMPT "What is the model name of the refeigerator?"
+output Model_Name
+
+return
+
+
+detailLoop()
+
+//calculating the cubic feet of the refrigerator 
+
+num Cubic_Inches = Height * Width * Depth
+num Cubic_Feet = Cubic_Inches/CONVERSION_NUMBER
+output Cubic_Feet
+
+return
+
+//Ending Job
+EndofJob()
+
+print "End of Job" 
+
+return
+
+
+
+
+

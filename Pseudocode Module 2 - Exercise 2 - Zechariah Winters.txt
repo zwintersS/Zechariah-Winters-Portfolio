@@ -1,0 +1,51 @@
+Planning 
+Varibles needed
+Account balance
+number of times account was overdrawn. 
+fee = (1% of balance - 5)*number of overdraws 
+Need 3 modules 1= housekeeping ( prompts for and accepts a balance)
+ 2= details (prompts for and accepts number of overdrafts, computes the fee, and displays result) 
+ 3= end of job (displays a thank you message) 
+
+Start
+Declarations 
+	num Account_Balance
+	num Number_Of_Overdraws
+	num Fee
+HouseKeeping()
+ output num Account_Balance
+
+Details()
+output num Fee
+output num Account_Balance
+
+EndofJob()
+
+End
+
+
+HouseKeeping()
+
+input ACCOUNT_PROMPT "What is you current account balance?"
+output Account_Balacne
+
+return
+
+
+Details()
+
+input OVERDRAFT_PROMPT "How many times was the account overdrawn?" 
+output num Number_Of_Overdraws
+num Fee = ((0.01 *  num Account_Balance) -5)* num Number_Of_Overdraws
+num Account_Balance = num Account_Balance - num Fee
+
+Output PROMPT_FEE "Your Fee is" + num Fee
+Output PROMPT_NEW_BALANCE "Your new balance is" + num Account_Balance
+
+return
+
+
+EndofJob()
+print "Thanks for using this program" 
+
+return
