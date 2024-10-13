@@ -1,0 +1,166 @@
+
+Start //Zechariah
+	Declarations 
+		string FirstName
+		string LastName
+		string EmpID
+		num Dependants 
+		num DependantsDeduction
+		num HoursWorked
+		num HourlyRate 
+		num GrossPay
+		num TotalGrossPay
+		num OverTime
+		num OTPay
+		num NetPay
+		num PreTaxAmount
+		num StateDeduction 
+		num FedDeduction
+		string PromptAnswer
+		bool Login = false
+		
+	DATABASE_CONNECTION = connectToDatabase 
+While Login != true	
+output "Enter an employee ID."
+  	input EmpID
+    		QUERY = "Employee ID"
+   	 if RESULTS = GM or RESULTS = HR then
+      		 Login = true
+ 	   else
+       		 output "Out of rank. Please put in another ID."
+       		 input EmpID
+  	  end if
+endwhile
+
+EmployeeInformation () 
+
+	While EmpID != “Logout”
+GrossPay()
+
+		NetPay()
+
+		informationValidation()
+	endwhile
+
+	EndOfJob()
+		
+Stop 
+
+
+
+EmployeeInformation() //Sam
+    output "Enter an Employee ID to start payroll or type Logout to exit?"
+    input EmpID
+
+If EmpID != “Logout” then
+    QUERY = "First name, last name, dependents, hours worked, and hourly rate"
+    output = FirstName, LastName, Dependents, HoursWorked, HourlyRate
+endif
+return
+
+
+
+
+
+
+
+
+
+
+GrossPay() //Zechariah
+	Declarations
+		num CONFULLTIMEHOURS = 40
+		num OTPAYBONUS = 1.5
+	
+//Hour Check
+	output FirstName + LastName + “ worked ” + HoursWorked + “is that correct? Yes or No” 
+	
+input PromptAnswer
+
+	If PromptAnswer = “Yes” or PromptAnswer = “yes” then
+		//continue to the next step
+	else
+		output = “Please enter the correct hours worked.” 
+		input HoursWorked
+	endif 
+
+//Calculating OT
+
+OverTime = HoursWorked - CONFULLTIMEHOURS
+
+if OverTime <= 0 then 
+	OverTime = 0 
+	output OverTime
+endif 
+
+if OverTime > 0 then
+	HoursWorked = HoursWorked - Overtime
+	output HoursWorked
+endif
+
+//Calculating OT Pay
+
+	OTPay = OverTime * (HourlyRate * OTPAYBONUS)
+	output OTPay
+
+//Calculating Gross Pay
+
+	GrossPay = HoursWorked * HourlyRate 
+	output GrossPay
+
+	TotalGrossPay = GrossPay + OTPay
+	output TotalGrossPay
+
+return
+
+
+NetPay() //Zechariah
+
+
+	Declarations
+		num CONDEPENDANTSPRICE = 25
+		num CONSTATETAXPER = 0.056
+		num CONFEDTAXPER= 0.079	
+
+	//Calculating Dependants Deduction
+	DependantsDeduction = Dependants * CONDEPENDANTSPRICE
+	output DependantsDeduction
+
+	//Calculating PreTax
+	PreTaxAmount = TotalGrossPay - DependantsDeduction
+	output PreTaxAmount
+
+	//Calculating Tax Amounts 
+	StateDeduction = PreTaxAmount * CONSTATETAXPER
+	output StateDeduction
+	
+	FedDeduction = PreTaxAmount * CONFEDTAXPER
+	output FedDeduction
+	
+	//Calculating Net Pay
+	NetPay = PreTaxAmount - StateDeduction -FedDeduction
+	output NetPay
+return
+
+
+
+
+
+Information Validation() //Amber
+	output FirstName + LastName “Has worked: ” +HoursWorked + “and ” + OverTime +” hours of OT”
+output “Is this information correct? Yes or No”
+Input AnswerPrompt
+If AnswerPrompt = “Yes” or AnswerPrompt = “yes” then
+	output “Thank you for confirming this employee’s payroll!! Please enter another employee ID or type Logout to Exit.”
+else 
+	output “Please enter an employee ID or type ‘Logout’ to exit:”
+Endif
+return
+
+	
+
+
+
+EndOfJob() //Zechariah
+	Output  “Logging Out”
+return 
